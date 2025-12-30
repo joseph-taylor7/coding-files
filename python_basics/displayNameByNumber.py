@@ -14,7 +14,7 @@ for user in users:
     
     
 
-number = input("Enter A Number").strip()
+number = input("Enter A Number ").strip()
 
 while True:
 

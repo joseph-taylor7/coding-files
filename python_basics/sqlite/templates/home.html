@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
+    <link rel="shortcut icon" href="/static/icon.jpg" type="image/x-icon">
+
+    </style>
+    <title>Home</title>
+</head>
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+{% if messages %}
+<div class="flash-container">
+    {% for category, message in messages %}
+    <div class="flash {{ category }}">
+        {{ message }}
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+{% endwith %}
+
+
+<body>
+
+    <section class="header"> 
+
+        {% if logged_in %}
+        <div class="welcome">
+            Welcome back {{name}}!
+            
+        </div>
+        {%else%}
+        <div class="welcome">
+            Thank you for visiting our website.
+        </div>
+        {%endif%}
+
+        <div class="menu">
+            <ul>
+                <li><a href="/about">About</a></li>
+                <li><a href="/contact">Contact us</a></li>
+                <li><a href="/shop">Shop</a></li>
+            </ul>
+        </div>
+
+        <div class="nav">
+            <div class="profile"> 
+                {% if logged_in %}
+                <div class="circle" id="circle" style="background-color: green;"> <p>{{letter}}</p></div>
+                {% else%}
+                <div class="circle" id="circle"><img src="/static/profile.png" alt="" srcset=""></div>
+                {% endif %}
+            </div>
+            <div class="box" id="box">
+                {% if logged_in %}
+                <div class="close" id="close_box">X</div>
+                <p>{{name}} {{lname}}</p>
+                <a href="/logout">Logout</a>
+                <a href="/setting">Settings</a>
+                {%else%}
+                <div class="close" id="close_box">X</div>
+                <p>Not logged in</p>
+                <a href="/login">Login</a>
+                <a href="/signup">Signup</a>
+                <a href="/about">About</a>
+                {%endif%}
+
+            </div>
+        </div>
+
+    </section>
+
+    <section class="section">
+        <div class="shopping">
+            <h1 class>Online Shoping <br> We are here to serve.</h1>
+            <img src="{{url_for('static', filename='order.jpg')}}" alt="" id="signup_img">
+        </div>
+    
+        <div class="shopping">
+            <h1 class>Easy way to buy <br> online.</h1>
+            <img src="{{url_for('static', filename='easy.png')}}" alt="" id="signup_img">
+        </div>
+    </section>
+    
+    
+    <section class="footer">
+        Still making the progress
+    </section>
+
+
+    <script src="/static/script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
+    <link rel="shortcut icon" href="/static/icon.jpg" type="image/x-icon">
+    <title>Sign Up</title>
+
+
+    </style>
+</head>
+
+<body>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    <div class="flash-container">
+        {% for category, message in messages %}
+        <div class="flash {{ category }}">
+            {{ message }}
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    {% endwith %}
+
+
+
+    <div class="header">
+        Sign up
+    </div>
+
+   
+        <section class="main">
+            <div class="development">
+                <h1 class>Signup we would like you to <br> access our services.</h1>
+                <img src="{{url_for('static', filename='development.jpg')}}" alt="" id="signup_img">
+            </div>
+
+            <div class="userform">
+                <form action="/signup" method="post">
+                    <h1>Sign up</h1>
+                    <div class="span">
+                        <div class="part">
+                            <div class="field">
+                                <label for="fname">First Name:</label>
+                                <input type="text" name="fname" required>
+                            </div>
+                            <div class="field">
+                                <label for="lname">Last Name:</label>
+                                <input type="text" name="lname" required>
+                            </div>
+                        </div>
+                        <div class="part">
+                            <div class="field">
+                                <label for="email">Email:</label>
+                                <input type="email" name="email" id="email" required>
+                            </div>
+                            <div class="field">
+                                <label for="password">Password:</label>
+                                <input type="password" name="password" id="password" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <button>Create</button>
+                    </div>
+                    <div class="field">
+                        <p>Already have an account? <a href="/login">Login</a></p>
+                    </div>
+                </form>
+            </div>
+        </section>
+    
+
+    <section class="footer">
+        Still making the progress
+    </section>
+
+    <script src="/static/script.js"></script>
+
+</body>
+
+</html>

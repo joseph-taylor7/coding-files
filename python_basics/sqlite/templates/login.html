@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
+    <link rel="shortcut icon" href="/static/icon.jpg" type="image/x-icon">
+    <title>Login</title>
+
+</head>
+
+<body>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    <div class="flash-container">
+        {% for category, message in messages %}
+        <div class="flash {{ category }}">
+            {{ message }}
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    {% endwith %}
+
+
+
+    <div class="header">Login</div>
+    <section class="main">
+        <div class="userform">
+            <form action="/login" method="post">
+                <h1>Login</h1>
+                <div class="field">
+                    <label for="email">Email:</label>
+                    <input type="email" name="email" required>
+                </div>
+                <div class="field">
+                    <label for="password">Password:</label>
+                    <input type="password" name="password" id="password" required>
+                </div>
+                <div class="field">
+                    <button>Login</button>
+                </div>
+                <div class="field">
+                    <p>Don't have an account? <a href="/signup">Sign up</a></p>
+                </div>
+                <div class="error">{{error}}</div>
+            </form>
+        </div>
+
+        <div class="development">
+            <h1>Hope that you have been having <br>great time.</h1>
+            <img src="{{url_for('static', filename='progeress.jpg')}}" alt="">
+        </div>
+    </section>
+    <section class="footer">
+        Still making the progress
+    </section>
+
+    <script src="/static/script.js"></script>
+
+</body>
+
+</html>
