@@ -1,1 +1,1 @@
-print(cursor.fetchall())
+print("Table Update")

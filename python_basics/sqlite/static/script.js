@@ -10,12 +10,13 @@
   const box=document.querySelector("#box");
   const close_box=document.querySelector("#close_box");
 
+ 
+
   close_box.addEventListener('click', () =>{
     box.style.display = "none";
   })
 
   circle.addEventListener('click', () =>{
-
     box.style.display = "block";
     box.style.display = "flex";
   })

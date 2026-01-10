@@ -30,7 +30,7 @@
 
         {% if logged_in %}
         <div class="welcome">
-            Welcome back {{name}}!
+            Welcome back {{name}}! 
             
         </div>
         {%else%}
@@ -52,21 +52,23 @@
                 {% if logged_in %}
                 <div class="circle" id="circle" style="background-color: green;"> <p>{{letter}}</p></div>
                 {% else%}
-                <div class="circle" id="circle"><img src="/static/profile.png" alt="" srcset=""></div>
+                <div class="circle" id="circle"><p>Login</p></div>
                 {% endif %}
             </div>
             <div class="box" id="box">
                 {% if logged_in %}
                 <div class="close" id="close_box">X</div>
                 <p>{{name}} {{lname}}</p>
-                <a href="/logout">Logout</a>
-                <a href="/setting">Settings</a>
+                <a href="/logout" >Logout</a>
+                <a href="/admin">Admin Panel</a>
+                <a href="/setting" >Settings</a>
+                
                 {%else%}
                 <div class="close" id="close_box">X</div>
                 <p>Not logged in</p>
-                <a href="/login">Login</a>
-                <a href="/signup">Signup</a>
-                <a href="/about">About</a>
+                <a href="/login" >Login</a>
+                <a href="/signup" >Signup</a>
+                <a href="/about" >About</a>
                 {%endif%}
 
             </div>
@@ -88,7 +90,7 @@
     
     
     <section class="footer">
-        Still making the progress
+        In progress...
     </section>
 
 

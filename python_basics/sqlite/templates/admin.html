@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
+    <title>Admin's Control Panel</title>
+</head>
+<div class="tinydevice">Controls can't be displayed on small devices</div>
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+{% if messages %}
+<div class="flash-container">
+    {% for category, message in messages %}
+    <div class="flash {{ category }}">
+        {{ message }}
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+{% endwith %}
+
+<body id="admin_page">
+
+    <section class="admin_header">
+        <h1>Admin's Control Panel</h1>
+        <div class="nav">
+            <div class="profile">
+                {% if logged_in %}
+                <div class="circle" id="circle" style="background-color: gold">
+                    <p>{{letter}}</p>
+                </div>
+                {% else%}
+                <div class="circle" id="circle"><img src="{{url_for('static', filename='profile.png')}}" alt=""
+                        srcset="">
+                </div>
+                {% endif %}
+            </div>
+            <div class="box" id="box" style="background-color: rgb(0,0,0,0.9);">
+                {% if logged_in %}
+                <div class="box_header">
+                    <div class="user_name">{{role}} {{name}}
+                        {{lname}}</div>
+                    <div class="close" id="close_box" style="color: gold;">Close</div>
+
+                </div>
+                <div class="box_link">
+                    <a href="/admin" style="color: white;">Admin Panel</a>
+                    <a href="" style="color: white;">Update User</a>
+                    <a href="/signup" style="color: white;">Add User</a>
+                    <a href="" style="color: white;">Create Table</a>
+                    <a href="" style="color: white;">Update Table</a>
+                    <a href="" style="color: white;">Make user an admin</a>
+                    <a href="" style="color: white;">Update User</a>
+                    <a href="" style="color: white;">Clear Data</a>
+                    <a href="" style="color: white;">Remove User</a>
+                    <a href="" style="color: white;">Remove Table</a>
+                    <a href="/setting" style="color: white;">Settings</a>
+                    <a href="/logout" style="color: white;">Logout</a>
+                </div>
+                {%endif%}
+            </div>
+    </section>
+    <section class="control">
+        <div class="box" id="search_user">
+            <h1>View Specific User</h1>
+            <form action="/admin/user" method="POST">
+                <input type="search" name="email" placeholder="Type User Email..." required>
+                <button>Get User</button>
+            </form>
+        </div>
+        <div class="box" id="view_order">
+            <h1>View Specific Order</h1>
+            <form action="/view_order" method="post">
+                <input type="search" name="view_order" required>
+                <button>Get Order</button>
+            </form>
+        </div>
+        <div class="box" id="payements">
+            <h1>View Payment</h1>
+            <form action="/view_payment" method="post">
+                <input type="search" name="view_payment" required>
+                <button>Get Payment</button>
+            </form>
+        </div>
+        <div class="box" id="all_users">
+            <h1>Display All Users</h1>
+            <form action="/admin/users" method="post">
+                <button>Display</button>
+            </form>
+        </div>
+        <div class="box" >
+            <h1>Update User</h1>
+            <details>
+                <summary>Click</summary>
+                <form action="/admin/user" method="post">
+                    <input type="email" name="email" id="email" placeholder="Enter User Email..." required>
+                    <button>Check if user exist</button>
+                </form>
+            </details>
+        </div>
+        <div class="box">
+            <h1>Remove User</h1>
+            <form action="/admin/remove_user" method="post">
+                <input type="email" name="email" id="" required placeholder="Enter User Email...">
+                <button>Remove</button>
+            </form>
+        </div>
+        <div class="box">
+            <h1>Grant Admin Access To A User</h1>
+            <form action="/admin/grant_admin" method="post">
+                <input type="email" name="email" id="" required placeholder="Enter User Email...">
+                <button>Grant</button>
+            </form>
+        </div>
+        <div class="box">
+            <h1>Revoke Admin Access From A User</h1>
+            <form action="/admin/revoke_admin" method="post">
+                <input type="email" name="email" id="" required placeholder="Enter User Email...">
+                <button>Revoke</button>
+            </form>
+        </div>
+    </section>
+
+    {% if found_user %}
+    <div class="admin_table">
+        <h1>{{view_user}}</h1>
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Role</th>
+            </tr>
+            <tr>
+                <td>{{ found_user.id }}</td>
+                <td>{{ found_user.fname }} {{ found_user.lname }}</td>
+                <td>{{ found_user.email }}</td>
+                <td>{{ found_user.role }}</td>
+            </tr>
+        </table>
+    </div>
+    {% endif %}
+
+    {% if users %}
+    <div class="admin_table">
+
+        <h1>{{view_user}}</h1>
+        <table border="1" cellpadding="10">
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Role</th>
+            </tr>
+
+            {% for user in users %}
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.fname }} {{user.lname}}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.role }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% endif %}
+    </div>
+
+
+
+
+
+
+
+
+    <script src="{{url_for('static', filename='script.js')}}"></script>
+</body>
+
+</html>
